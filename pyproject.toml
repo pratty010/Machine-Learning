@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "machine-learning"
+version = "0.1.0"
+description = ""
+authors = ["pratty010 <pratyushp010@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+matplotlib = "^3.9.1"
+pandas = "^2.2.2"
+
+
+[tool.poetry.group.dev.dependencies]
+poetry = "^1.8.3"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
