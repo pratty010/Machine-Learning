@@ -75,24 +75,35 @@ def train_model(df: pd.DataFrame) -> None:
     # Make predictions using the testing set
     y_pred = model.predict(X_test)
 
-    # Calculate the mean squared error
+    # Calculate the mean squared error - the optimum cost function
     mse = np.mean((y_pred - y_test) ** 2)
     print("Mean squared error:", mse)
 
-    # Calculate the coefficient of determination (R^2)
+    # Calculate the coefficient of determination (R^2) - predict accuracy
     r_squared = model.score(X_test, y_test)
     print("Coefficient of determination (R^2):", r_squared)
 
+    # print `weight` and `bias` parameters for the model
+    print("Weight/Coefficients: ", model.coef_)
+    print("Intercept: ", model.intercept_)
+
+    y_fit = model.intercept_ + model.coef_ * df.YearsExperience
+
     # Display a scatter plot of the actual and predicted salaries(best fit line)
     plt.scatter(df.YearsExperience, df.Salary, color='blue' )
-    plt.plot(X_test['YearsExperience'].to_numpy(), y_pred, 'r')
+    plt.plot(X_test['YearsExperience'], y_pred, 'r')
+    # plt.plot(df.YearsExperience, y_fit, 'r')
     plt.tight_layout()
     plt.show()
 
 def main():
+    """
+    Main function to execute the entire movie dataset analysis pipeline.
+    Example of Basic Linear Regression models.
+    """
 
-    dataset = 'Machine Learning/data/Salary_Experience_LR/Salary_dataset.csv'
     # Load the dataset
+    dataset = 'machine-learning/data/Salary_Experience_LR/Salary_dataset.csv'
     df = load_data(dataset)
 
     # Preprocess the data. Cleaning the dataset.

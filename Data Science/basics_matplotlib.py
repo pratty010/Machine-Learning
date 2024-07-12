@@ -255,8 +255,8 @@ def threeD_plot():
     z = np.linspace(0, 20, 100)
 
     # Calculate the sine and cosine values for each z value
-    x  = np.sin(z)
-    y  = np.cos(z)
+    x  = 2 * np.sin(z)
+    y  = -1 * np.cos(z)
 
     # Plot the 3D line using the calculated x, y, and z values
     axs.plot3D(x, y, z, 'red')
