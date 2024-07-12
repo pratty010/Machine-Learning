@@ -59,7 +59,7 @@ def preprocess_data(df: pd.DataFrame) -> pd.DataFrame:
     df.set_index('title', inplace=True)
 
     # Save the DataFrame to an Excel file for further analysis
-    df.to_excel("machine-learning/data/Movie_Data/data.xlsx")
+    df.to_excel("machine-learning/data/Movie_Data_MLR/data.xlsx")
 
     # Drop features that may not have the best correlation with the target variable - `imdb_rating`
     print(df["title_type"].unique()) 
@@ -95,7 +95,7 @@ def preprocess_data(df: pd.DataFrame) -> pd.DataFrame:
     df.drop(features_drop, axis=1, inplace=True)
 
     # Save the cleaned DataFrame to an Excel file
-    df.to_excel("machine-learning/data/Movie_Data/cleaned_data.xlsx")
+    df.to_excel("machine-learning/data/Movie_Data_MLR/cleaned_data.xlsx")
 
     return df
 
@@ -146,20 +146,20 @@ def feature_engineering(df: pd.DataFrame) -> pd.DataFrame:
         df[col] = df[col].cat.rename_categories(binary_mapping)
 
     # save final data to excel file
-    df.to_excel("machine-learning/data/Movie_Data/final_data.xlsx")
+    df.to_excel("machine-learning/data/Movie_Data_MLR/cleaned_data.xlsx")
 
     # correlation matrix heatmap
     sns.heatmap(df.corr(), annot=True, cmap="coolwarm")
     # plt.show()
 
-    # can drop all `best` features as they have very low correlation with the target variable
+    # can drop all `best` features as they have very low correlation with the target variable. 
+    # This improves the model's performance. Can ignore.
     features_drop = ['best_pic_nom', 'best_pic_win', 'best_actor_win', 'best_actress_win', 'best_dir_win', 'top200_box']
     df.drop(features_drop, axis=1, inplace=True)
 
     # correlation matrix heatmap
     sns.heatmap(df.corr(), annot=True, cmap="coolwarm")
     # plt.show()
-
 
     return df
 
@@ -215,7 +215,7 @@ def main():
     """
 
     # Load the dataset
-    dataset = 'machine-learning/data/Movie_Data/movies.RData'
+    dataset = 'machine-learning/data/Movie_Data_MLR/movies.RData'
     df = load_data(dataset)
 
     # Preprocess the dataset
