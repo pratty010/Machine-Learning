@@ -59,7 +59,7 @@ def preprocess_data(df: pd.DataFrame) -> pd.DataFrame:
     df.set_index('title', inplace=True)
 
     # Save the DataFrame to an Excel file for further analysis
-    df.to_excel("machine-learning/data/Movie_Data_MLR/data.xlsx")
+    df.to_excel("machine-learning/data/Movie_Data_MLR/processed_data/data.xlsx")
 
     # Drop features that may not have the best correlation with the target variable - `imdb_rating`
     print(df["title_type"].unique()) 
@@ -95,7 +95,7 @@ def preprocess_data(df: pd.DataFrame) -> pd.DataFrame:
     df.drop(features_drop, axis=1, inplace=True)
 
     # Save the cleaned DataFrame to an Excel file
-    df.to_excel("machine-learning/data/Movie_Data_MLR/cleaned_data.xlsx")
+    df.to_excel("machine-learning/data/Movie_Data_MLR/processed_data/cleaned_data.xlsx")
 
     return df
 
@@ -146,7 +146,7 @@ def feature_engineering(df: pd.DataFrame) -> pd.DataFrame:
         df[col] = df[col].cat.rename_categories(binary_mapping)
 
     # save final data to excel file
-    df.to_excel("machine-learning/data/Movie_Data_MLR/cleaned_data.xlsx")
+    df.to_excel("machine-learning/data/Movie_Data_MLR/processed_data/final_data.xlsx")
 
     # correlation matrix heatmap
     sns.heatmap(df.corr(), annot=True, cmap="coolwarm")
@@ -202,9 +202,9 @@ def train_model(df: pd.DataFrame) -> None:
     weights = model.coef_
     bias = model.intercept_
 
-    # print("Weights:", weights)
-    # print("Sum of weights:", np.sum(weights))
-    # print("Bias:", bias)
+    print("Weights:", weights)
+    print("Sum of weights:", np.sum(weights))
+    print("Bias:", bias)
 
     return r_squared
 
@@ -223,6 +223,9 @@ def main():
 
     # Perform feature engineering on the dataset
     final_df = feature_engineering(pros_df)
+
+    # # test the training of the model
+    # acc = train_model(final_df)
 
     # Train multiple models and calculate the average accuracy
     avg_accuracy = 0
