@@ -266,7 +266,7 @@ def dataframe_stats(df: pd.DataFrame):
     # transpose the DataFrame
     print(df.T)  # transpose the DataFrame
 
-def datframe_merge(df: pd.DataFrame):
+def dataframe_merge(df: pd.DataFrame):
 
     data2 = {
         'ID': [4, 5, 6, 7, 8],
@@ -317,7 +317,7 @@ def main():
 
     dataframe_pd(df)
     dataframe_stats(df)
-    datframe_merge(df)
+    dataframe_merge(df)
 
 if __name__ == '__main__':
     main()
